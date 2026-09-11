@@ -17,7 +17,7 @@ const ESQUEMA = [
 ];
 
 const CODIGO_DECIDIR = 'const TOTAL = 20;\n'
-  + 'const PRECIO = 10;\n'
+  + 'const PRECIO = 15;\n'
   + 'const PRECIO_NORMAL = 25;\n'
   + 'const HORAS = 48;\n'
   + '\n'
@@ -205,10 +205,10 @@ const decidirCupo = node({
     empresa: 'Empresa',
     cargo: 'Gerenta de TI',
     estado: 'reservado',
-    precio_usd: 10,
+    precio_usd: 15,
     pagado: false,
     origen: 'hero',
-    asunto: 'Cupo #1 reservado — complete el pago de USD 10',
+    asunto: 'Cupo #1 reservado — complete el pago de USD 15',
     html: '<div>…</div>',
     respuesta: { ok: true, estado: 'reservado', cupo: 1, restantes: 19 }
   }]

@@ -4,7 +4,7 @@ Landing de lanzamiento del ebook **IA Segura ISO 27001**, de Rodrigo Figueroa, p
 en GitHub Pages.
 
 - **URL:** https://keepsync-hub.github.io/ebook-ia-segura-iso27001/
-- **Oferta:** las primeras **20 reservas** pagan **USD 10**; después el ebook queda en **USD 25**.
+- **Oferta:** las primeras **20 reservas** pagan **USD 15**; después el ebook queda en **USD 25**.
 - **La landing reserva, no cobra.** El link de pago se manda por correo, con 48 h de plazo.
 
 ## Cómo está armado
