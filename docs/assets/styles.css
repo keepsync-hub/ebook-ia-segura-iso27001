@@ -71,12 +71,13 @@ b, strong { color: #fff; font-weight: 650; }
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line-soft);
 }
-.topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
+.topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 66px; }
 
 .brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
-.brand-mark {
-  width: 15px; height: 15px; border-radius: 4px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+.brand-foto {
+  width: 26px; height: 26px; border-radius: 50%;
+  object-fit: cover; flex: none;
+  box-shadow: 0 0 0 1.5px rgba(249, 115, 22, .55);
 }
 
 .topbar-cta {
@@ -149,7 +150,7 @@ b, strong { color: #fff; font-weight: 650; }
 
 /* ── formulario ── */
 
-.form-anchor { position: relative; top: -78px; }
+.form-anchor { position: relative; top: -82px; }
 
 .reserva {
   background: var(--surface);
@@ -388,6 +389,53 @@ b, strong { color: #fff; font-weight: 650; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+/* ───────────────────────  el autor  ───────────────────────
+   Va después de las preguntas y antes del cierre: cuando ya se resolvieron las
+   dudas del producto, lo que queda por confiar es en la persona. */
+
+.band-autor { background: var(--bg-alt); }
+
+.autor {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.autor-foto {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 3px var(--bg-alt), 0 0 0 5px rgba(249, 115, 22, .45), 0 18px 40px rgba(0, 0, 0, .5);
+}
+
+.autor-texto { max-width: 62ch; }
+.autor-texto .h2 { margin-bottom: 16px; }
+.autor-texto p { color: var(--muted); }
+
+.autor-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 8px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(37, 211, 102, .45);
+  background: rgba(37, 211, 102, .1);
+  color: #4ade80;
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 14.5px;
+}
+.autor-wa:hover { background: rgba(37, 211, 102, .18); }
+.autor-wa svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+
+@media (max-width: 700px) {
+  .autor { grid-template-columns: 1fr; gap: 24px; justify-items: start; }
+  .autor-foto { width: 132px; height: 132px; }
 }
 
 /* ───────────────────────  burbuja de WhatsApp  ───────────────────────
