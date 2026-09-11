@@ -16,7 +16,7 @@
   var URL_RESERVA  = BASE + '/reserva';
 
   var TOTAL         = 20;
-  var PRECIO        = 10;
+  var PRECIO        = 15;
   var PRECIO_NORMAL = 25;
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
