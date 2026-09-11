@@ -82,6 +82,14 @@
   function cargarCupos() {
     pedir(URL_CUPOS, { method: 'GET', headers: { Accept: 'application/json' } }, 4000)
       .then(function (data) {
+        // n8n manda los precios junto con el contador: son la fuente de verdad.
+        // Si este archivo quedó cacheado en el navegador con un precio viejo, esto
+        // lo corrige solo; las constantes de arriba quedan como respaldo.
+        var precio = Number(data && data.precio);
+        var normal = Number(data && data.precio_normal);
+        if (isFinite(precio) && precio > 0) PRECIO = precio;
+        if (isFinite(normal) && normal > 0) PRECIO_NORMAL = normal;
+
         var restantes = Number(data && data.restantes);
         if (isFinite(restantes)) pintarCupos(restantes);
       })
