@@ -191,6 +191,10 @@ b, strong { color: #fff; font-weight: 650; }
 .btn-primary:active { transform: translateY(1px); }
 .btn-primary[disabled] { opacity: .6; cursor: progress; }
 
+/* Respaldo de pago: es un <a>, no un <button>, así que necesita display block
+   para que el width: 100% de .btn-primary signifique algo. */
+.btn-pago { display: block; margin-top: 14px; text-align: center; text-decoration: none; }
+
 .microcopy { font-size: 13px; color: var(--muted-dim); margin: 14px 0 0; }
 
 .form-status { margin: 14px 0 0; font-size: 14.5px; font-weight: 600; display: none; }

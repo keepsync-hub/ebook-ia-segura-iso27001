@@ -19,6 +19,13 @@
   var PRECIO        = 15;
   var PRECIO_NORMAL = 25;
 
+  // n8n manda el link en /cupos; esto es el respaldo si no responde.
+  var LINK_PAGO = 'https://www.webpay.cl/form-pay/420561';
+
+  // Lo que dijo el contador. null = todavía no sabemos, y en la duda se asume
+  // que queda cupo: el HTML estático ya promete 20 copias.
+  var restantes = null;
+
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   var forms    = Array.prototype.slice.call(document.querySelectorAll('form.reserva'));
@@ -52,16 +59,18 @@
 
   /* ─────────────────────────  contador de cupos  ───────────────────────── */
 
-  function pintarCupos(restantes) {
+  function pintarCupos(quedan) {
     var texto;
-    var agotado = restantes <= 0;
+    var agotado = quedan <= 0;
+
+    restantes = quedan;
 
     if (agotado) {
       texto = 'Las ' + TOTAL + ' copias a USD ' + PRECIO + ' ya están tomadas. Precio actual: USD ' + PRECIO_NORMAL + '.';
-    } else if (restantes === 1) {
+    } else if (quedan === 1) {
       texto = 'Queda 1 copia de ' + TOTAL + ' a USD ' + PRECIO + '.';
     } else {
-      texto = 'Quedan ' + restantes + ' de ' + TOTAL + ' copias a USD ' + PRECIO + '.';
+      texto = 'Quedan ' + quedan + ' de ' + TOTAL + ' copias a USD ' + PRECIO + '.';
     }
 
     contadores.forEach(function (el) { el.textContent = texto; });
@@ -89,9 +98,10 @@
         var normal = Number(data && data.precio_normal);
         if (isFinite(precio) && precio > 0) PRECIO = precio;
         if (isFinite(normal) && normal > 0) PRECIO_NORMAL = normal;
+        if (data && typeof data.link_pago === 'string' && data.link_pago) LINK_PAGO = data.link_pago;
 
-        var restantes = Number(data && data.restantes);
-        if (isFinite(restantes)) pintarCupos(restantes);
+        var quedan = Number(data && data.restantes);
+        if (isFinite(quedan)) pintarCupos(quedan);
       })
       .catch(function () {
         /* Silencio deliberado: se queda el texto estático del HTML. */
@@ -129,12 +139,10 @@
 
   var MENSAJES = {
     reservado: function (d) {
-      return 'Listo. Reservó el cupo #' + d.cupo + ' de ' + TOTAL + ' a USD ' + PRECIO +
-             '. Le enviamos el link de pago por correo: tiene 48 horas para completarlo.';
+      return 'Listo. Reservó el cupo #' + d.cupo + ' de ' + TOTAL + ' a USD ' + PRECIO + '.';
     },
     ya_reservado: function (d) {
-      return 'Este correo ya tenía reservado el cupo #' + d.cupo +
-             '. Le reenviamos el link de pago, revise su bandeja de entrada.';
+      return 'Este correo ya tenía reservado el cupo #' + d.cupo + '.';
     },
     lista_espera: function () {
       return 'Los ' + TOTAL + ' cupos a USD ' + PRECIO + ' ya estaban tomados, así que lo dejamos en la ' +
@@ -142,9 +150,41 @@
     }
   };
 
+  /* El respaldo cuando el navegador bloquea la ventana emergente. Es un enlace
+   * real y enfocable: deshabilitar los campos del formulario no lo alcanza,
+   * porque un <a> no es parte de form.elements. */
+  function mostrarBotonPago(form) {
+    if (form.querySelector('.btn-pago')) return;
+    var a = document.createElement('a');
+    a.className = 'btn-primary btn-pago';
+    a.href = LINK_PAGO;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = 'Pagar USD ' + PRECIO;
+    var ancla = form.querySelector('.form-status');
+    if (ancla) form.insertBefore(a, ancla); else form.appendChild(a);
+  }
+
   function enviar(form) {
     var btn = form.querySelector('.btn-primary');
     var textoBtn = btn ? btn.textContent : '';
+
+    /* El pago se abre ACÁ, dentro del gesto que disparó el submit: es el único
+     * momento en que el navegador lo permite. Hacerlo al volver el fetch sería
+     * tarde — ya se perdió la activación de usuario y Safari lo bloquea siempre.
+     * El link es el mismo para toda reserva, así que no hay nada que esperar.
+     * Si el contador ya dijo que no quedan cupos, esto es lista de espera y no
+     * hay nada que cobrar. */
+    var agotado = restantes !== null && restantes <= 0;
+    var ventana = null;
+    if (!agotado) {
+      try { ventana = window.open(LINK_PAGO, '_blank'); } catch (e) { ventana = null; }
+      // Sin la referencia, Webpay no puede tocar esta pestaña. No se usa la
+      // opción 'noopener' de window.open porque devuelve null siempre y con eso
+      // se pierde la señal de que la ventana fue bloqueada.
+      if (ventana) { try { ventana.opener = null; } catch (e) {} }
+    }
+    var bloqueada = !agotado && !ventana;
 
     if (btn) { btn.disabled = true; btn.textContent = 'Reservando…'; }
     estado(form, 'wait', 'Guardando su reserva…');
@@ -166,7 +206,14 @@
         var arma = data && MENSAJES[data.estado];
         if (!arma) throw new Error('respuesta inesperada');
 
-        estado(form, 'ok', arma(data));
+        var texto = arma(data);
+        if (data.estado !== 'lista_espera') {
+          texto += bloqueada
+            ? ' Su navegador bloqueó la ventana de pago: use el botón de acá abajo.'
+            : ' Le abrimos la ventana de pago; si la cerró, el link le llega por correo.';
+          if (bloqueada) mostrarBotonPago(form);
+        }
+        estado(form, 'ok', texto);
 
         /* La reserva quedó: se cierra el formulario para que nadie la mande dos veces. */
         Array.prototype.forEach.call(form.elements, function (el) { el.disabled = true; });
@@ -177,7 +224,8 @@
       .catch(function () {
         if (btn) { btn.disabled = false; btn.textContent = textoBtn; }
         estado(form, 'err',
-          'No pudimos registrar la reserva. Vuelva a intentarlo en un momento, o escríbale a Rodrigo por ' +
+          (ventana ? 'Le abrimos la ventana de pago, pero no pudimos registrar la reserva: no pague todavía. ' : '') +
+          'Vuelva a intentarlo en un momento, o escríbale a Rodrigo por ' +
           'WhatsApp con el botón verde y la tomamos a mano.');
       });
   }

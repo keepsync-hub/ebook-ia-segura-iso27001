@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230b1017'/><path d='M11 14v-2.5a5 5 0 0 1 10 0V14' fill='none' stroke='%23f97316' stroke-width='2.4' stroke-linecap='round'/><rect x='8.5' y='14' width='15' height='11' rx='2.6' fill='%23f97316'/></svg>" />
-<link rel="stylesheet" href="assets/styles.css?v=15" />
+<link rel="stylesheet" href="assets/styles.css?v=16" />
 </head>
 <body>
 
@@ -91,15 +91,15 @@
 
         <label class="consent">
           <input type="checkbox" name="consentimiento" required />
-          <span>Acepto que me escriban para coordinar el pago y la entrega del ebook.</span>
+          <span>Acepto que me escriban para confirmar el pago y enviarme el ebook.</span>
         </label>
 
-        <button type="submit" class="btn-primary">Reservar mi copia por USD&nbsp;15</button>
+        <button type="submit" class="btn-primary">Reservar y pagar USD&nbsp;15</button>
 
         <p class="microcopy">
-          <b>No se cobra nada ahora.</b> Le llega un correo con el link de pago por
-          <b>Webpay (Transbank)</b> y tiene <b>48 horas</b> para completarlo. Pasado ese plazo el cupo
-          se libera para la siguiente persona.
+          Al reservar <b>se abre la ventana de pago</b> de <b>Webpay (Transbank)</b> y su cupo queda
+          tomado. Si la cierra sin pagar, el mismo link le llega por correo: el cupo se confirma
+          cuando el pago entra.
         </p>
 
         <p class="form-status" role="status" aria-live="polite"></p>
@@ -359,11 +359,11 @@
       </details>
       <details>
         <summary>¿Qué incluye los USD 15 y cómo pago?</summary>
-        <p>El ebook completo en PDF y EPUB, más las actualizaciones de esta edición. Al reservar no se cobra nada: le llega un correo con el <a href="https://www.webpay.cl/form-pay/420561" target="_blank" rel="noopener noreferrer">link de pago por Webpay (Transbank)</a> y usted decide ahí. El precio de USD 15 solo aplica a las primeras 20 reservas; después el libro queda en su precio normal de USD 25.</p>
+        <p>El ebook completo en PDF y EPUB, más las actualizaciones de esta edición. Al reservar se abre la ventana de <a href="https://www.webpay.cl/form-pay/420561" target="_blank" rel="noopener noreferrer">pago por Webpay (Transbank)</a>, que cobra con tarjeta en pesos chilenos al cambio del día. Si prefiere pagar después, cierre la ventana: el mismo link le llega por correo. El precio de USD 15 solo aplica a las primeras 20 reservas; después el libro queda en su precio normal de USD 25.</p>
       </details>
       <details>
-        <summary>¿Qué pasa si no pago dentro de las 48 horas?</summary>
-        <p>El cupo se libera y pasa a la siguiente persona en la fila. No se le cobra nada ni queda ningún compromiso pendiente: puede volver a comprar más adelante al precio vigente en ese momento.</p>
+        <summary>¿Tengo que pagar de inmediato?</summary>
+        <p>Al reservar se le abre la ventana de pago, que es la forma más rápida de cerrarlo. Si prefiere hacerlo después, cierre esa ventana: el link le llega igual por correo y su cupo queda tomado mientras tanto. Eso sí, el cupo se confirma cuando el pago entra, así que conviene no dejarlo para muy adelante.</p>
       </details>
       <details>
         <summary>¿Cuándo lo recibo?</summary>
@@ -424,11 +424,11 @@
 
       <label class="consent">
         <input type="checkbox" name="consentimiento" required />
-        <span>Acepto que me escriban para coordinar el pago y la entrega del ebook.</span>
+        <span>Acepto que me escriban para confirmar el pago y enviarme el ebook.</span>
       </label>
 
-      <button type="submit" class="btn-primary">Reservar mi copia por USD&nbsp;15</button>
-      <p class="microcopy"><b>No se cobra nada ahora.</b> El link de pago por Webpay (Transbank) llega por correo y tiene 48 horas para usarlo.</p>
+      <button type="submit" class="btn-primary">Reservar y pagar USD&nbsp;15</button>
+      <p class="microcopy">Al reservar <b>se abre la ventana de pago</b> de Webpay (Transbank). Si la cierra sin pagar, el mismo link le llega por correo.</p>
       <p class="form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -456,6 +456,6 @@
   <span class="wa-texto">Escríbale a Rodrigo</span>
 </a>
 
-<script src="assets/reserva.js?v=15" defer></script>
+<script src="assets/reserva.js?v=16" defer></script>
 </body>
 </html>
