@@ -171,8 +171,7 @@
       .catch(function () {
         if (btn) { btn.disabled = false; btn.textContent = textoBtn; }
         estado(form, 'err',
-          'No pudimos registrar la reserva. Vuelva a intentarlo en un momento o escríbanos a hola@keepsync.ai ' +
-          'y la tomamos a mano.');
+          'No pudimos registrar la reserva. Vuelva a intentarlo en un momento: su cupo sigue disponible.');
       });
   }
 

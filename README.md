@@ -1,6 +1,7 @@
 # IA Segura ISO 27001 — landing de lanzamiento
 
-Landing de lanzamiento del ebook **IA Segura ISO 27001**, publicada en GitHub Pages.
+Landing de lanzamiento del ebook **IA Segura ISO 27001**, de Rodrigo Figueroa, publicada
+en GitHub Pages.
 
 - **URL:** https://keepsync-hub.github.io/ebook-ia-segura-iso27001/
 - **Oferta:** las primeras **20 reservas** pagan **USD 10**; después el ebook queda en **USD 25**.
