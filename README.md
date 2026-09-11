@@ -81,10 +81,13 @@ La página no se rompe. El contador se queda con el texto estático del HTML ("S
 a este precio") y el formulario sigue enviable. Un fallo al enviar deja el formulario
 reenviable y ofrece el WhatsApp del autor como respaldo.
 
-## Para salir a producción
+## Estado
 
-1. Activar el workflow en n8n (hoy está inactivo).
-2. Activar GitHub Pages (arriba).
+El workflow de n8n está **activo** y probado de punta a punta contra las URLs de
+producción: reserva, contador, deduplicación por correo, honeypot y envío del correo
+con el link de pago. La Data Table quedó vacía, con los 20 cupos disponibles.
+
+Falta solo publicar la página: mergear a `main` y activar GitHub Pages (arriba).
 
 El link de pago, los precios y el plazo de 48 h son constantes al inicio del nodo
 **Decidir cupo y correo**; ahí se cambian si hace falta.
