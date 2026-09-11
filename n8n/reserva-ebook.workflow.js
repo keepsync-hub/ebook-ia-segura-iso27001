@@ -19,7 +19,6 @@ const ESQUEMA = [
 const CODIGO_DECIDIR = 'const TOTAL = 20;\n'
   + 'const PRECIO = 15;\n'
   + 'const PRECIO_NORMAL = 25;\n'
-  + 'const HORAS = 48;\n'
   + '\n'
   + '// Link de pago del precio de lanzamiento.\n'
   + "const LINK_PAGO = 'https://www.webpay.cl/form-pay/420561';\n"
@@ -97,16 +96,16 @@ const CODIGO_DECIDIR = 'const TOTAL = 20;\n'
   + "  asunto = 'Cupo #' + cupo + ' reservado — complete el pago de USD ' + PRECIO;\n"
   + "  cuerpo = '<p>' + saludo + '</p>'\n"
   + '    + encabezado\n'
-  + "    + '<p>El precio de lanzamiento de <strong>USD ' + PRECIO + '</strong> (en vez de USD ' + PRECIO_NORMAL + ') '\n"
-  + "    + 'queda bloqueado para usted durante <strong>' + HORAS + ' horas</strong>. Pasado ese plazo el cupo se '\n"
-  + "    + 'libera para la siguiente persona de la fila.</p>'\n"
+  + "    + '<p>Al reservar le abrimos la ventana de pago. Si la cerró, o prefirió dejarlo para '\n"
+  + "    + 'después, este es el mismo link: son <strong>USD ' + PRECIO + '</strong> en vez de USD ' + PRECIO_NORMAL + '.</p>'\n"
   + "    + '<p style=\"margin:28px 0\">'\n"
   + "    + '<a href=\"' + LINK_PAGO + '\" style=\"background:#f97316;color:#0a0f16;text-decoration:none;'\n"
   + "    + 'font-weight:700;padding:14px 26px;border-radius:9px;display:inline-block\">Pagar USD ' + PRECIO + '</a>'\n"
   + "    + '</p>'\n"
   + "    + '<p style=\"font-size:13px;color:#6a6255\">Si el botón no le funciona, copie este enlace: '\n"
   + "    + '<a href=\"' + LINK_PAGO + '\">' + LINK_PAGO + '</a></p>'\n"
-  + "    + '<p>Apenas confirmemos el pago le llega el enlace de descarga (PDF y EPUB) a este mismo correo.</p>';\n"
+  + "    + '<p>Su cupo ya está tomado y se confirma cuando entra el pago. Apenas eso pase le llega '\n"
+  + "    + 'el enlace de descarga (PDF y EPUB) a este mismo correo.</p>';\n"
   + '}\n'
   + '\n'
   + "const html = '<div style=\"' + pila + ';color:#2f2a22;line-height:1.65;max-width:560px\">'\n"
@@ -147,8 +146,9 @@ const CODIGO_CUPOS = 'const TOTAL = 20;\n'
   + '    total: TOTAL,\n'
   + '    tomados: tomados,\n'
   + '    restantes: Math.max(0, TOTAL - tomados),\n'
-  + '    precio: 10,\n'
-  + '    precio_normal: 25\n'
+  + '    precio: 15,\n'
+  + '    precio_normal: 25,\n'
+  + "    link_pago: 'https://www.webpay.cl/form-pay/420561'\n"
   + '  }\n'
   + '}];';
 
@@ -329,7 +329,7 @@ const contarCupos = node({
     name: 'Contar cupos',
     parameters: { mode: 'runOnceForAllItems', language: 'javaScript', jsCode: CODIGO_CUPOS }
   },
-  output: [{ total: 20, tomados: 1, restantes: 19, precio: 10, precio_normal: 25 }]
+  output: [{ total: 20, tomados: 1, restantes: 19, precio: 15, precio_normal: 25, link_pago: 'https://www.webpay.cl/form-pay/420561' }]
 });
 
 const responderCupos = node({
