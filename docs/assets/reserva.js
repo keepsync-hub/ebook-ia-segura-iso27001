@@ -95,7 +95,7 @@
   function validar(form) {
     var malos = [];
 
-    ['nombre', 'email', 'empresa', 'cargo'].forEach(function (campo) {
+    ['nombre', 'email'].forEach(function (campo) {
       var input = form.elements[campo];
       if (!input) return;
       var valor = input.value.trim();
@@ -144,8 +144,6 @@
     var cuerpo = {
       nombre:         form.elements.nombre.value.trim(),
       email:          form.elements.email.value.trim().toLowerCase(),
-      empresa:        form.elements.empresa.value.trim(),
-      cargo:          form.elements.cargo.value.trim(),
       consentimiento: form.elements.consentimiento.checked ? 'si' : 'no',
       website:        form.elements.website ? form.elements.website.value : '',
       origen:         form.dataset.origen || 'landing'
