@@ -171,7 +171,8 @@
       .catch(function () {
         if (btn) { btn.disabled = false; btn.textContent = textoBtn; }
         estado(form, 'err',
-          'No pudimos registrar la reserva. Vuelva a intentarlo en un momento: su cupo sigue disponible.');
+          'No pudimos registrar la reserva. Vuelva a intentarlo en un momento, o escríbale a Rodrigo por ' +
+          'WhatsApp con el botón verde y la tomamos a mano.');
       });
   }
 

@@ -68,11 +68,18 @@ descarta la petición antes de ejecutar un solo nodo si ese campo viene con algo
 correo no tiene forma de correo (`onlyRunIf`), y además ignora bots y sólo acepta peticiones
 desde `https://keepsync-hub.github.io`.
 
+### Contacto directo
+
+La página lleva una burbuja fija de WhatsApp al número del autor
+(`+56 9 8250 4273`, enlace `wa.me` con mensaje prellenado). Es también el
+respaldo cuando el formulario falla, cuando el visitante tiene JavaScript
+desactivado, y la vía para pedir que se borren los datos.
+
 ### Si n8n no responde
 
 La página no se rompe. El contador se queda con el texto estático del HTML ("Solo 20 copias
 a este precio") y el formulario sigue enviable. Un fallo al enviar deja el formulario
-reenviable y ofrece el correo de contacto como respaldo.
+reenviable y ofrece el WhatsApp del autor como respaldo.
 
 ## Antes de activar el workflow
 

@@ -73,7 +73,7 @@ b, strong { color: #fff; font-weight: 650; }
 }
 .topbar-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 62px; }
 
-.brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; letter-spacing: -0.01em; }
+.brand { display: inline-flex; align-items: center; gap: 9px; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; }
 .brand-mark {
   width: 15px; height: 15px; border-radius: 4px;
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
@@ -365,6 +365,14 @@ b, strong { color: #fff; font-weight: 650; }
 }
 
 @media (max-width: 620px) {
+  /* El nombre del autor es más largo que un logotipo: hay que darle aire a la barra. */
+  .brand { font-size: 14.5px; }
+  .topbar-cta { font-size: 13px; padding: 8px 12px; }
+}
+
+@media (max-width: 420px) {
+  /* Ya no cabe el precio en la barra; sigue a la vista en el hero, justo abajo. */
+  .cta-precio { display: none; }
   .hero { padding-block: 40px 54px; }
   .band { padding-block: 56px; }
   .field-row { grid-template-columns: 1fr; }
@@ -380,4 +388,40 @@ b, strong { color: #fff; font-weight: 650; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+/* ───────────────────────  burbuja de WhatsApp  ───────────────────────
+   Canal directo con el autor. Va fija sobre la página porque la duda que
+   frena una compra de este tipo aparece leyendo, no al final. */
+
+.wa {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #04220f;
+  text-decoration: none;
+  font-weight: 650;
+  font-size: 14.5px;
+  line-height: 1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45), 0 0 0 1px rgba(255, 255, 255, .08) inset;
+  transition: transform .14s ease, filter .14s ease;
+}
+.wa:hover  { filter: brightness(1.06); transform: translateY(-2px); }
+.wa:active { transform: translateY(0); }
+
+.wa-icon { width: 30px; height: 30px; fill: #04220f; flex: none; }
+
+.wa-texto { padding-right: 8px; white-space: nowrap; }
+
+@media (max-width: 620px) {
+  /* En pantalla angosta la etiqueta estorba al botón del formulario: solo el círculo. */
+  .wa { right: 14px; bottom: 14px; gap: 0; }
+  .wa-texto { display: none; }
 }
