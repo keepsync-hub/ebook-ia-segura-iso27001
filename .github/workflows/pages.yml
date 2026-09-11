@@ -1,0 +1,50 @@
+# Publica la landing en GitHub Pages.
+#
+# La fuente de Pages es "GitHub Actions" (Settings → Pages → Source), así que el
+# sitio se sirve desde el artefacto que sube este workflow y no desde una rama.
+# Lo que se publica es el contenido de docs/, tal cual: no hay build ni
+# dependencias que instalar.
+
+name: Publicar la landing
+
+on:
+  push:
+    branches: [main]
+    # Solo vale la pena republicar cuando cambia el sitio o este mismo workflow.
+    paths:
+      - 'docs/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Una publicación a la vez, sin cancelar la que ya está corriendo: cancelar a
+# medio camino puede dejar el sitio servido con una versión a medias.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - name: Traer el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Empaquetar docs/
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Publicar
+        id: despliegue
+        uses: actions/deploy-pages@v4

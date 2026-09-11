@@ -19,16 +19,21 @@ docs/
   assets/styles.css   estilos
   assets/reserva.js   contador de cupos + envío del formulario
   assets/og.png       imagen para compartir en redes (1200×630)
-  .nojekyll           evita que Jekyll procese assets/
+  .nojekyll           por si alguna vez se vuelve a servir desde una rama
+.github/workflows/
+  pages.yml           empaqueta docs/ y lo publica en Pages
 n8n/
   reserva-ebook.workflow.js   código SDK del workflow, fuente de verdad
 ```
 
 ## Publicar
 
-La página se sirve desde la carpeta `docs/` de `main`. Para activarla la primera vez:
-**Settings → Pages → Source: Deploy from a branch → `main` / `docs`**. Después de eso, cada
-push a `main` republica.
+La publicación va por **GitHub Actions**: el workflow `.github/workflows/pages.yml` empaqueta
+`docs/` y lo despliega en Pages. Cada push a `main` que toque `docs/` republica solo; también
+se puede lanzar a mano desde la pestaña Actions.
+
+Para activarlo la primera vez hay que dejar **Settings → Pages → Source: GitHub Actions**
+(una sola vez; si quedara en "Deploy from a branch", el workflow falla al desplegar).
 
 Para trabajar localmente:
 
@@ -87,7 +92,8 @@ El workflow de n8n está **activo** y probado de punta a punta contra las URLs d
 producción: reserva, contador, deduplicación por correo, honeypot y envío del correo
 con el link de pago. La Data Table quedó vacía, con los 20 cupos disponibles.
 
-Falta solo publicar la página: mergear a `main` y activar GitHub Pages (arriba).
+Falta solo publicar la página: mergear a `main` y dejar Pages en modo GitHub Actions
+(arriba). El primer push a `main` dispara el despliegue.
 
 El link de pago, los precios y el plazo de 48 h son constantes al inicio del nodo
 **Decidir cupo y correo**; ahí se cambian si hace falta.
