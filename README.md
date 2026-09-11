@@ -81,12 +81,13 @@ La página no se rompe. El contador se queda con el texto estático del HTML ("S
 a este precio") y el formulario sigue enviable. Un fallo al enviar deja el formulario
 reenviable y ofrece el WhatsApp del autor como respaldo.
 
-## Antes de activar el workflow
+## Para salir a producción
 
-1. Editar `LINK_PAGO` en el nodo **Decidir cupo y correo** — mientras diga `PENDIENTE`, el
-   correo de confirmación manda a una URL que no existe.
-2. Activar el workflow en n8n.
-3. Activar GitHub Pages (arriba).
+1. Activar el workflow en n8n (hoy está inactivo).
+2. Activar GitHub Pages (arriba).
+
+El link de pago, los precios y el plazo de 48 h son constantes al inicio del nodo
+**Decidir cupo y correo**; ahí se cambian si hace falta.
 
 ## Pendiente (fase 2)
 

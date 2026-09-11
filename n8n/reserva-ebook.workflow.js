@@ -21,8 +21,8 @@ const CODIGO_DECIDIR = 'const TOTAL = 20;\n'
   + 'const PRECIO_NORMAL = 25;\n'
   + 'const HORAS = 48;\n'
   + '\n'
-  + '// ─── Lo único que hay que editar antes de activar el workflow ───\n'
-  + "const LINK_PAGO = 'https://PENDIENTE-LINK-DE-PAGO';\n"
+  + '// Link de pago del precio de lanzamiento.\n'
+  + "const LINK_PAGO = 'https://www.webpay.cl/form-pay/420561';\n"
   + '\n'
   + "const req = $('Reserva entrante').first().json;\n"
   + 'const b = req.body || req;\n'
@@ -104,6 +104,8 @@ const CODIGO_DECIDIR = 'const TOTAL = 20;\n'
   + "    + '<a href=\"' + LINK_PAGO + '\" style=\"background:#f97316;color:#0a0f16;text-decoration:none;'\n"
   + "    + 'font-weight:700;padding:14px 26px;border-radius:9px;display:inline-block\">Pagar USD ' + PRECIO + '</a>'\n"
   + "    + '</p>'\n"
+  + "    + '<p style=\"font-size:13px;color:#6a6255\">Si el botón no le funciona, copie este enlace: '\n"
+  + "    + '<a href=\"' + LINK_PAGO + '\">' + LINK_PAGO + '</a></p>'\n"
   + "    + '<p>Apenas confirmemos el pago le llega el enlace de descarga (PDF y EPUB) a este mismo correo.</p>';\n"
   + '}\n'
   + '\n'
